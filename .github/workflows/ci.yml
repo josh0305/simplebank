@@ -24,4 +24,4 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Test
-        uses: make test
+        run: make test
