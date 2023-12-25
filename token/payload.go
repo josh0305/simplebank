@@ -17,7 +17,8 @@ var (
 var Issuer = "SimpleBank"
 
 type Payload struct {
-	ID uuid.UUID `json:"id"`
+	UID      uuid.UUID `json:"id"`
+	Username string    `json:"username"`
 	jwt.RegisteredClaims
 }
 
@@ -29,10 +30,11 @@ func NewPayload(username string, duration time.Duration) (*Payload, error) {
 
 	payload := &Payload{
 		tokenID,
+		username,
 		jwt.RegisteredClaims{
 			ExpiresAt: jwt.NewNumericDate(time.Now().Add(duration)),
 			IssuedAt:  jwt.NewNumericDate(time.Now()),
-			Issuer:    username,
+			Issuer:    Issuer,
 		},
 	}
 
